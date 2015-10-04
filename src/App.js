@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { NICE, SUPER_NICE } from './colors';
+require('./App.scss');
 
 class Counter extends Component {
   constructor(props) {
