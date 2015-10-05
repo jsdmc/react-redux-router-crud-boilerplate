@@ -58,5 +58,8 @@
     "webpack": "^1.9.6",
     "webpack-dev-middleware": "^1.2.0",
     "webpack-hot-middleware": "^2.0.0"
+  },
+  "engines": {
+    "node": "4.1.1"
   }
 }
