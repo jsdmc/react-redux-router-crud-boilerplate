@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import AutoCounterItem from './AutoCounterItem';
 import { NICE, SUPER_NICE } from './colors';
-import '../../styles/main.scss';
 
 export default class AutoCounter extends Component {
   render() {
