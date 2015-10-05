@@ -3,6 +3,8 @@ var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
+var ROOT_PATH = path.resolve(__dirname);
+
 module.exports = {
   devtool: 'eval',
   entry: [
@@ -35,14 +37,23 @@ module.exports = {
     })
   ],
   module: {
-    loaders: [{
-      test: /\.js$/,
-      loaders: ['babel'],
-      include: path.join(__dirname, 'src')
-    },
-    {
-      test: /\.scss$/,
-      loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=2&sourceMap!autoprefixer?browsers=last 2 version!sass?outputStyle=expanded&sourceMap=true&sourceMapContents=true')
-    }]
+    preLoaders: [
+      {
+        test: /\.(js|jsx)$/,
+        loaders: ['eslint'],
+        include: path.resolve(ROOT_PATH, 'src')
+      }
+    ],
+    loaders: [
+      {
+        test: /\.(js|jsx)$/,
+        loaders: ['babel'],
+        include: path.resolve(ROOT_PATH, 'src')
+      },
+      {
+        test: /\.scss$/,
+        loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=2&sourceMap!autoprefixer?browsers=last 2 version!sass?outputStyle=expanded&sourceMap=true&sourceMapContents=true')
+      }
+    ]
   }
 };
