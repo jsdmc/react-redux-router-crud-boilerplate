@@ -6,7 +6,7 @@
     "clean": "rimraf dist",
     "build:webpack": "NODE_ENV=production webpack --config webpack.config.prod.js",
     "build": "npm run clean && npm run build:webpack",
-    "start": "node devServer.js",
+    "start": "npm run clean && node devServer.js",
     "lint": "eslint src"
   },
   "repository": {
@@ -42,6 +42,7 @@
     "eslint-plugin-react": "^2.3.0",
     "express": "^4.13.3",
     "extract-text-webpack-plugin": "^0.8.2",
+    "html-webpack-plugin": "^1.6.1",
     "node-sass": "^3.3.3",
     "react-transform-catch-errors": "^1.0.0",
     "react-transform-hmr": "^1.0.0",

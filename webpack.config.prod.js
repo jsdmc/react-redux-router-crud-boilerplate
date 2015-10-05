@@ -1,6 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   devtool: 'eval',
@@ -10,12 +11,16 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: '/dist/'
+    publicPath: '/'
   },
   plugins: [
-    // css files from the extract-text-plugin loader
-    //put tot 
+    // writes to "styles.css" file
     new ExtractTextPlugin('styles.css'),
+    new HtmlWebpackPlugin({
+      template : './src/index.html',
+      filename : 'index.html',
+      inject   : 'body'
+    }),
 
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.DefinePlugin({

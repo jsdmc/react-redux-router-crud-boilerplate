@@ -1,5 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   devtool: 'source-map',
@@ -10,11 +11,16 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: '/dist/'
+    publicPath: '/'
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
+    new webpack.NoErrorsPlugin(),
+    new HtmlWebpackPlugin({
+      template : './src/index.html',
+      filename : 'index.html',
+      inject   : 'body'
+    })
   ],
   module: {
     loaders: [{
@@ -24,7 +30,12 @@ module.exports = {
     },
     {
       test: /\.scss$/,
-      loader: 'style!css?modules&importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]!autoprefixer?browsers=last 2 version!sass?outputStyle=expanded&sourceMap'
+      loaders: [
+          'style-loader',
+          'css?modules&importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]',
+          'autoprefixer?browsers=last 2 version',
+          'sass?outputStyle=expanded&sourceMap&includePaths[]="./src/styles"'
+        ]
     }]
   }
 };

@@ -14,7 +14,10 @@ app.use(require('webpack-dev-middleware')(compiler, {
 app.use(require('webpack-hot-middleware')(compiler));
 
 app.get('*', function(req, res) {
-  res.sendFile(path.join(__dirname, 'index.html'));
+  compiler.plugin("done", function(stats) {
+  	var html = stats.compilation.assets['index.html'].source();
+  	res.send(html);
+  });
 });
 
 app.listen(3000, 'localhost', function(err) {
