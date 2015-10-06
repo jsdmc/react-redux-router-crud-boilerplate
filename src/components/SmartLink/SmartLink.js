@@ -11,7 +11,7 @@ const mapStateToProps = (state) => ({ routerState: state.router });
 class SmartLink extends Component {
   render() {
     // Load styles object and use generated class names. 
-    // Sinse the are unique (specified in webpack config) - you can be sure you will not breake global styles
+    // Sinse the are unique by default (specified in webpack config) - you can be sure you will not breake global styles
     const styles = require('./SmartLink.scss');
 
     const { title, url, routerState } = this.props;

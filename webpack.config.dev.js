@@ -42,6 +42,11 @@ module.exports = {
       {
         test: /\.scss$/,
         loader: 'style!css?modules&importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]!autoprefixer?browsers=last 2 version!sass?outputStyle=expanded&sourceMap'
+        // The query parameter modules enables the CSS Modules spec. (css-loader?modules)
+        // https://github.com/css-modules/css-modules
+        // This enables Local scoped CSS by default. (You can switch it off with :global(...) or :global for selectors and/or rules.)
+        // https://github.com/css-modules/css-modules
+
         // Used without Extract text plugin for reloading purpose
         // now index.html has "styles.css" entry which is empty in dev mode. But it's ok)
         // loader: ExtractTextPlugin.extract('style', 'style!css?modules&importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]!autoprefixer?browsers=last 2 version!sass?outputStyle=expanded&sourceMap')

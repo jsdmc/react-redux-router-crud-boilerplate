@@ -1,10 +1,6 @@
 @import 'base';
 @import 'vendor/normalize';
 
-//global class - will not have prefix
-:global(.some-class){
-	padding: 10px;
-}
 body{
 	background-color: #EEEAF5;
 }
