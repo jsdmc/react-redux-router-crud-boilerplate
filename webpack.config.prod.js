@@ -1,14 +1,14 @@
 var path = require('path');
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 var ROOT_PATH = path.resolve(__dirname);
 
 module.exports = {
   devtool: 'eval',
   entry: [
-    './src/index'
+    './src/index.js',
+    './src/index.html'
   ],
   output: {
     path: path.join(__dirname, 'dist'),
@@ -18,12 +18,6 @@ module.exports = {
   plugins: [
     // writes to "styles.css" file
     new ExtractTextPlugin('styles.css'),
-    new HtmlWebpackPlugin({
-      template : './src/index.html',
-      filename : 'index.html',
-      inject   : 'body'
-    }),
-
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
@@ -53,6 +47,10 @@ module.exports = {
       {
         test: /\.scss$/,
         loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=2&sourceMap!autoprefixer?browsers=last 2 version!sass?outputStyle=expanded&sourceMap=true&sourceMapContents=true')
+      },
+      {
+        test: /\.html$/,
+        loader: "file?name=[name].[ext]",
       }
     ]
   }

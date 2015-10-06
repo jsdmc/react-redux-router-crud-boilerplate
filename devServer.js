@@ -13,11 +13,8 @@ app.use(require('webpack-dev-middleware')(compiler, {
 
 app.use(require('webpack-hot-middleware')(compiler));
 
-app.get('*', function(req, res) {
-  compiler.plugin("done", function(stats) {
-  	var html = stats.compilation.assets['index.html'].source();
-  	res.send(html);
-  });
+app.use(function(req, res) {
+  res.sendFile(__dirname + '/src/index.html');
 });
 
 app.listen(3000, 'localhost', function(err) {
