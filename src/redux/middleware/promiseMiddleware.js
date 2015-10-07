@@ -1,6 +1,6 @@
 export default function promiseMiddleware() {
   return next => action => {
-    const { promise, type, ...rest } = action;
+    const { promise, types, ...rest } = action;
    
     if (!promise) {
       return next(action);
@@ -10,18 +10,12 @@ export default function promiseMiddleware() {
     
     next({ ...rest, type: REQUEST });
 
-    return promise
-      .then(res => {
-        next({ ...rest, res, type: SUCCESS });
-        
-        return true;
-      })
-      .catch(error => {
-        next({ ...rest, error, type: FAILURE });
-        
-        // Another benefit is being able to log all failures here 
-        console.log(error);
-        return false;
+    return promise.then(
+        (result) => next({...rest, result, type: SUCCESS}),
+        (error) => next({...rest, error, type: FAILURE})
+      ).catch((error)=> {
+        console.error('MIDDLEWARE ERROR:', error);
+        next({...rest, error, type: FAILURE});
       });
    };
 }

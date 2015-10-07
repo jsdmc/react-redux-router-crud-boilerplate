@@ -3,13 +3,13 @@ import axios from 'axios';
 //--------------------------- Action constants --------------------------
 
 // names for actions can be more specific
-const LOGIN_REQUEST = 'LOGIN_REQUEST';
+const LOGIN = 'LOGIN';
 const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
-const LOGIN_FAILURE = 'LOGIN_FAILURE';
+const LOGIN_FAIL = 'LOGIN_FAIL';
 
-const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
+const LOGOUT = 'LOGOUT';
 const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
-const LOGOUT_FAILURE = 'LOGOUT_FAILURE';
+const LOGOUT_FAIL = 'LOGOUT_FAIL';
 
 //--------------------------- Reducer function --------------------------
 
@@ -24,14 +24,21 @@ const initialState = {
 
 export default function auth(state = initialState, action = {}) {
   switch (action.type) {
-    case LOGIN_REQUEST:
-      return Object.assign({}, state, {loggingIn: true});
+    case LOGIN:
+      return {
+        ...state,
+        loggingIn: true
+      };
       
     case LOGIN_SUCCESS:
-      return Object.assign({}, state, {
-        loggingIn: false, user: action.user, role: action.role});
+      return {
+        ...state,
+        loggingIn: false,
+        user: action.result.data,
+        role: action.role
+      };
     
-    case LOGIN_FAILURE:
+    case LOGIN_FAIL:
       return {
         ...state,
         loggingIn: false,
@@ -39,7 +46,7 @@ export default function auth(state = initialState, action = {}) {
         role: null,
         loginError: action.error
       };
-    case LOGOUT_REQUEST:
+    case LOGOUT:
       return {
         ...state,
         loggingOut: true
@@ -52,7 +59,7 @@ export default function auth(state = initialState, action = {}) {
         userRole: null,
         loginError: null
       };
-    case LOGOUT_FAILURE:
+    case LOGOUT_FAIL:
       return {
         ...state,
         loggingOut: false,
@@ -65,90 +72,18 @@ export default function auth(state = initialState, action = {}) {
 
 //--------------------------- Action functions --------------------------
 
-function loginRequest(user) {
+export function login(userName, password) {
   return {
-    type: LOGIN_REQUEST,
-    user: user
+    types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL],
+    promise: axios
+      .post('http://localhost:3001/api/login', { userName, password: password })
   };
 }
 
-function loginSuccess(user, data) {
+export function logout(userName) {
   return {
-    type: LOGIN_SUCCESS,
-    user: data.user,
-    role: data.role
-  };
-}
-
-function loginFailure(user, error) {
-  return {
-    type: LOGIN_FAILURE,
-    user: user,
-    error: error
-  };
-}
-
-export function login(user, password) {
-  return (dispatch) => {
-    
-    dispatch(loginRequest(user));
-
-    return axios
-      .post('http://localhost:3001/api/login', { user: user, password: password })
-      .then(response => dispatch(loginSuccess(user, response.data)))
-      .catch(function (error){
-        const response=error.response;
-        if(response===undefined){
-          dispatch(loginFailure(user, error));
-        }else{
-          error.status = response.status;
-          error.statusText = response.statusText;     
-          error.message = response.message;     
-          dispatch(loginFailure(user, error));
-        }
-      });
-  };
-}
-
-function logoutRequest(user) {
-  return {
-    type: LOGOUT_REQUEST,
-    user
-  };
-}
-
-function logoutSuccess(user) {
-  return {
-    type: LOGOUT_SUCCESS,
-    user
-  };
-}
-
-function logoutFailure(user, error) {
-  return {
-    type: LOGOUT_FAILURE,
-    user,
-    error
-  };
-}
-
-export function logout(user) {
-  return dispatch => {
-    
-    dispatch(logoutRequest(user));
-
-    return axios.post('http://localhost:3001/api/logout', { user: user })
-      .then(response => dispatch(logoutSuccess(response.data)))
-      .catch(function (error){
-        const response=error.response;
-        if(response===undefined){
-          dispatch(logoutFailure(user, error));
-        }else{
-          error.status = response.status;
-          error.statusText = response.statusText;     
-          error.message = response.message;      
-          dispatch(logout(user, error));
-        }
-      });
+    types: [LOGOUT, LOGOUT_SUCCESS, LOGOUT_FAIL],
+    promise: axios
+      .post('http://localhost:3001/api/logout', { userName })
   };
 }

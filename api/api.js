@@ -19,15 +19,15 @@ app.use(function(req, res, next) {
 
 app.post('/api/login', function(req, res) {
     const credentials = req.body;
-    if(credentials.user==='admin' && credentials.password==='password'){
-      res.json({'user': credentials.user, 'role': 'ADMIN'});   
+    if(credentials.userName==='admin' && credentials.password==='password'){
+      res.json({'userName': credentials.userName, 'role': 'ADMIN'});   
     }else{
       res.status('500').send({'message' : 'Invalid user/password'});
     }
 });
 
 app.post('/api/logout', function(req, res) {
-    res.json({'user': 'admin', 'role': 'ADMIN'});   
+    res.json({'userName': 'admin', 'role': 'ADMIN'});   
 });
 
 app.listen(port, function () {

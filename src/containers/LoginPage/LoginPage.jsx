@@ -5,15 +5,17 @@ import { login } from '../../redux/modules/auth';
 
 import './LoginPage.scss';
 
+const mapStateToProps = (state) => ({
+  user: state.auth.user,
+  loginError: state.auth.loginError
+});
+
 class Login extends Component {
 
   componentWillReceiveProps(nextProps) {
-    console.log('Login: componentWillReceiveProps: '+nextProps);
-    console.log('user: '+this.props.user+'\tnextUser='+nextProps.user);
-
     if (nextProps.user) {
       // logged in, let's show home
-      this.dispatch(pushState(null, '/counter'));
+      this.props.dispatch(pushState(null, '/counter'));
     }
   }
 
@@ -72,19 +74,9 @@ class Login extends Component {
 }
 
 Login.propTypes = {
-  user: PropTypes.string,
+  user: PropTypes.object,
   loginError: PropTypes.object,
-  dispatch: PropTypes.func.isRequired,
-  routerState: PropTypes.object.isRequired
+  dispatch: PropTypes.func.isRequired
 };
-
-function mapStateToProps(state){
-  const { auth, router } = state;
-  if(auth){
-    return {user: auth.user, loginError: auth.loginError, routerState: router};
-  }else{
-    return {user: null, routerState: router};
-  }
-}
 
 export default connect(mapStateToProps)(Login);

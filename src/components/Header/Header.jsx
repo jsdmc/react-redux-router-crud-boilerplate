@@ -1,14 +1,18 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 // import { Link } from 'react-router';
+import { connect } from 'react-redux';
 import './Header.scss';
 
-export default class Header extends Component {
+const mapStateToProps = (state) => ({ user: state.auth.user });
+
+class Header extends Component {
   onLogoutClick() {
     event.preventDefault();
     // this.props.handleLogout();
   }
 
   render() {
+    const { user } = this.props;
     return (
       <nav className="navbar navbar-inverse navbar-fixed-top">
         <div className="container-fluid">
@@ -25,7 +29,7 @@ export default class Header extends Component {
             <ul className="nav navbar-nav navbar-right">
               <li className="dropdown">
                 <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                  <span className='fa fa-user header_fa'></span>'Anonymous'<span className="caret"></span>
+                  <span className='fa fa-user header_fa'></span>{ user && user.userName || 'Anonymous'}<span className="caret"></span>
                 </a>
                 <ul className="dropdown-menu">
                   <li><a href="#">Settings</a></li>
@@ -52,3 +56,9 @@ export default class Header extends Component {
     );
   }
 }
+
+Header.propTypes = {
+  user: PropTypes.object,
+};
+
+export default connect(mapStateToProps)(Header);
