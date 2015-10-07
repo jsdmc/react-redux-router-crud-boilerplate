@@ -1,8 +1,8 @@
-// actions constants
+//--------------------------- Action constants --------------------------
 export const INCREMENT_COUNTER = 'INCREMENT_COUNTER';
 export const DECREMENT_COUNTER = 'DECREMENT_COUNTER';
 
-// reducer
+//--------------------------- Reducer function --------------------------
 export default function counter(state = 0, action) {
   switch (action.type) {
   case INCREMENT_COUNTER:
@@ -14,7 +14,7 @@ export default function counter(state = 0, action) {
   }
 }
 
-// actions functions
+//--------------------------- Action functions --------------------------
 export function increment() {
   return {
     type: INCREMENT_COUNTER

@@ -10,6 +10,9 @@ module.exports = {
     './src/index.js',
     './src/index.html'
   ],
+  resolve : {
+    extensions : ['', '.js', '.jsx']
+  },
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',

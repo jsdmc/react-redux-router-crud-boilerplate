@@ -1,0 +1,29 @@
+:global{
+	.panel-signin {
+	  margin-top: 25%;
+	}
+
+	.form-signin {
+	  max-width: auto;
+	  padding: 15px;
+	  margin: 0 auto;
+
+		.checkbox {
+		  margin-bottom: 10px;
+		}
+
+		.form-control:focus {
+		  z-index: 2;
+		}
+		 input[type="text"] {
+		  margin-bottom: 0px;
+		}
+		 input[type="password"] {
+		  margin-bottom: 0px;
+		}
+	}
+
+	.input-group {
+	  margin-bottom: 10px;
+	}
+}

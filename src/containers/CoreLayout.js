@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { SmartLink } from '../components';
+import { Header, SmartLink } from '../components';
 import '../styles/main.scss';
 
 export default class CoreLayout extends Component {
@@ -9,36 +9,9 @@ export default class CoreLayout extends Component {
   }
 
   render() {
-    const navTop = () => (
-      <nav className="navbar navbar-inverse navbar-fixed-top">
-        <div className="container-fluid">
-          <div className="navbar-header">
-            <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-              <span className="sr-only">Toggle navigation</span>
-              <span className="icon-bar"></span>
-              <span className="icon-bar"></span>
-              <span className="icon-bar"></span>
-            </button>
-            <a className="navbar-brand" href="#">React-Redux-Router-CRUD-boilerplate</a>
-          </div>
-          <div id="navbar" className="navbar-collapse collapse">
-            <ul className="nav navbar-nav navbar-right">
-              <li><a href="#">Dashboard</a></li>
-              <li><a href="#">Settings</a></li>
-              <li><a href="#">Profile</a></li>
-              <li><a href="#">Help</a></li>
-            </ul>
-            <form className="navbar-form navbar-right">
-              <input type="text" className="form-control" placeholder="Search..." />
-            </form>
-          </div>
-        </div>
-      </nav>
-    );
-
     return (
       <div>
-        { navTop() }
+        <Header />
         <div className="container-fluid">
           <div className="row">
             <div className="col-sm-3 col-md-2 sidebar">
