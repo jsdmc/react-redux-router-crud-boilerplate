@@ -35,7 +35,7 @@ export default function auth(state = initialState, action = {}) {
         ...state,
         loggingIn: false,
         user: action.result.data,
-        role: action.role
+        role: action.result.data.role
       };
     
     case LOGIN_FAIL:

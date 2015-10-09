@@ -10,7 +10,7 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.json({ type: 'application/json' }))
 
 app.use(function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+    res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
     res.header('Access-Control-Allow-Headers', 'Content-Type');
 
@@ -19,7 +19,7 @@ app.use(function(req, res, next) {
 
 app.post('/api/login', function(req, res) {
     const credentials = req.body;
-    if(credentials.userName==='admin' && credentials.password==='password'){
+    if(credentials.userName==='admin@example.com' && credentials.password==='password'){
       res.json({'userName': credentials.userName, 'role': 'ADMIN'});   
     }else{
       res.status('500').send({'message' : 'Invalid user/password'});
