@@ -20,14 +20,28 @@ app.use(function(req, res, next) {
 app.post('/api/login', function(req, res) {
     const credentials = req.body;
     if(credentials.userName==='admin@example.com' && credentials.password==='password'){
-      res.json({'userName': credentials.userName, 'role': 'ADMIN'});   
+      res.json({
+        userName: credentials.userName,
+        role: 'ADMIN'
+      });   
     }else{
-      res.status('500').send({'message' : 'Invalid user/password'});
+      // just demonstration of server-side validation
+      res.status('401').send({
+        message : 'Invalid user/password',
+        // userName - the same field name as used in form on client side
+        validationErrors: { 
+          userName : 'Aha, server-side validation error',
+          password: 'Use another password'
+        }
+      });
     }
 });
 
 app.post('/api/logout', function(req, res) {
-    res.json({'userName': 'admin', 'role': 'ADMIN'});   
+    res.json({
+      'userName': 'admin', 
+      'role': 'ADMIN'
+    });   
 });
 
 app.listen(port, function () {

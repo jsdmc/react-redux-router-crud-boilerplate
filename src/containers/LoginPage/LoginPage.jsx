@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { pushState } from 'redux-router';
 import { connectReduxForm } from 'redux-form';
 import { login } from '../../redux/modules/auth';
-import loginFormValidation from './loginFormValidation';
+import loginFormValidation from './loginForm/loginFormValidation';
 import classnames from 'classnames';
 
 // react binding for redux

@@ -4,7 +4,7 @@ import { CoreLayout, MoviesPage, LoginPage } from './containers';
 import { Counter, AutoCounter } from './components';
 
 export default (
-	 <Route path="/" component={CoreLayout}>
+ 	<Route path="/" component={CoreLayout}>
 	 	<Route path="login" component={LoginPage} />
   	<Route path="counter" component={Counter}/>
   	<Route path="autoCounter" component={AutoCounter} />

@@ -5,7 +5,8 @@ import axios from 'axios';
 // names for actions can be more specific
 const LOGIN = 'LOGIN';
 const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
-const LOGIN_FAIL = 'LOGIN_FAIL';
+// if other components need to react to some action of current module - export corresponding action type
+export const LOGIN_FAIL = 'LOGIN_FAIL';
 
 const LOGOUT = 'LOGOUT';
 const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
