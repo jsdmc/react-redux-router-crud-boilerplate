@@ -11,7 +11,12 @@ module.exports = {
     './src/index.html'
   ],
   resolve : {
-    extensions : ['', '.js', '.jsx']
+    extensions : ['', '.js', '.jsx'],
+    alias: {
+      'containers' : path.resolve(ROOT_PATH, './src/containers'),
+      'components' : path.resolve(ROOT_PATH, './src/components'),
+      'redux-base' : path.resolve(ROOT_PATH, './src/redux-base')
+    }
   },
   output: {
     path: path.join(__dirname, 'dist'),

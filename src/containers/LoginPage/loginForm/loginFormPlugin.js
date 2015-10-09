@@ -1,5 +1,5 @@
 // import login action const
-import { LOGIN_FAIL } from '../../../redux/modules/auth';
+import { LOGIN_FAIL } from 'redux-base/modules/auth';
 
 export default {
   loginForm: (state, action) => { // <------ 'loginForm' is name of form given to connectReduxForm()

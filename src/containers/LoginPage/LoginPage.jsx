@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { pushState } from 'redux-router';
 import { connectReduxForm } from 'redux-form';
-import { login } from '../../redux/modules/auth';
+import { login } from 'redux-base/modules/auth';
 import loginFormValidation from './loginForm/loginFormValidation';
 import classnames from 'classnames';
 
