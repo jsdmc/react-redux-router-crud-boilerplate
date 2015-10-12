@@ -17,7 +17,9 @@ module.exports = {
     alias: {
       'containers' : path.resolve(ROOT_PATH, './src/containers'),
       'components' : path.resolve(ROOT_PATH, './src/components'),
-      'redux-base' : path.resolve(ROOT_PATH, './src/redux-base')
+      'redux-base' : path.resolve(ROOT_PATH, './src/redux-base'),
+      'utils' : path.resolve(ROOT_PATH, './src/utils'),
+      'config' : path.resolve(ROOT_PATH, './src/config')
     }
   },
   output: {

@@ -5,8 +5,9 @@ import { ReduxRouter } from 'redux-router';
 
 import { Provider } from 'react-redux';
 import configureStore from './redux-base/configureStore';
-
 import getRoutes from './routes';
+
+import config from 'config';
 
 const store = configureStore();
 
@@ -17,7 +18,7 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-if (process.env.NODE_ENV !== 'production') {
+if (!config.isProduction) {
   // Use require because imports can't be conditional.
   // In production, you should ensure process.env.NODE_ENV
   // is envified so that Uglify can eliminate this
