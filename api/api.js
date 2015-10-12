@@ -1,6 +1,8 @@
 require('babel/register')();
 
 import express from 'express';
+import session from 'express-session';
+import bodyParser from 'body-parser';
 import path from 'path';
 
 import { login, logout } from './actions/auth';
@@ -12,7 +14,13 @@ var app = express(),
 var isProduction = process.env.NODE_ENV === 'production';
 var port = isProduction ? process.env.PORT : 3001;
 
-var bodyParser = require('body-parser');
+app.use(session({
+  secret: 'react and redux rule!!!!',
+  resave: false,
+  saveUninitialized: false,
+  cookie: { maxAge: 60000 }
+}));
+
 app.use(bodyParser.json({ type: 'application/json' }))
 
 app.use(function(req, res, next) {
@@ -23,14 +31,27 @@ app.use(function(req, res, next) {
     next();
 });
 
-router.post('/api/login', login);
-router.post('/api/logout', logout);
+router.post('/login', login);
+router.post('/logout', logout);
 
 // actions added for movies
 router.route('/movies')
-  .get(moviesController.getAll)
+  .get( (req, res) => {
+    moviesController.getAll(req, res)
+    .then((result) => {
+      res.json(result);
+    })
+    .catch((reason) => {
+      if (reason && reason.redirect) {
+        res.redirect(reason.redirect);
+      } else {
+        console.error('API ERROR: ', reason);
+        res.status(reason.status || 500).json(reason);
+      }
+    });
+});
 
-app.use('/', router);
+app.use('/api', router);
 
 app.listen(port, function () {
   console.log('Server running on port ' + port);

@@ -1,7 +1,25 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { load } from 'redux-base/modules/movies';
 
-export default class MoviesPage extends Component {
+const mapStateToProps = state => ({
+    movies: state.movies.data,
+    error: state.movies.error,
+    loading: state.movies.loading
+});
+
+const mapActionsToProps = { load };
+
+export class MoviesPage extends Component {
   render() {
+    const { movies, error, loading, load } = this.props;
+    let refreshClassName = 'fa fa-refresh';
+    if (loading) {
+      refreshClassName += ' fa-spin';
+    }
+
+    const styles = require('./MoviesPage.scss');
+
     return (
       <div>
         <h1 className="page-header">Dashboard</h1>
@@ -29,8 +47,30 @@ export default class MoviesPage extends Component {
             </div>
           </div>
 
-          <h2 className="sub-header">Section title</h2>
+          <h2 className="sub-header">Movies</h2>
+
+          <button className={styles.refreshBtn + ' btn btn-success'} onClick={load}><i
+            className={refreshClassName}/> {' '} Reload movies
+          </button>
+
+          <p>
+            This widgets are stored in your session, so feel free to edit it and refresh.
+          </p>
+
+          {error &&
+          <div className="alert alert-danger" role="alert">
+            <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            {' '}
+            {error.toString()}
+          </div>}
+
+          {loading &&
+          <div>
+            Loading...(here you can render spinner or whatever)
+          </div>}
+
           <div className="table-responsive">
+          {movies && movies.length &&
             <table className="table table-striped">
               <thead>
                 <tr>
@@ -38,126 +78,32 @@ export default class MoviesPage extends Component {
                   <th>Header</th>
                   <th>Header</th>
                   <th>Header</th>
-                  <th>Header</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>1,001</td>
-                  <td>Lorem</td>
-                  <td>ipsum</td>
-                  <td>dolor</td>
-                  <td>sit</td>
-                </tr>
-                <tr>
-                  <td>1,002</td>
-                  <td>amet</td>
-                  <td>consectetur</td>
-                  <td>adipiscing</td>
-                  <td>elit</td>
-                </tr>
-                <tr>
-                  <td>1,003</td>
-                  <td>Integer</td>
-                  <td>nec</td>
-                  <td>odio</td>
-                  <td>Praesent</td>
-                </tr>
-                <tr>
-                  <td>1,003</td>
-                  <td>libero</td>
-                  <td>Sed</td>
-                  <td>cursus</td>
-                  <td>ante</td>
-                </tr>
-                <tr>
-                  <td>1,004</td>
-                  <td>dapibus</td>
-                  <td>diam</td>
-                  <td>Sed</td>
-                  <td>nisi</td>
-                </tr>
-                <tr>
-                  <td>1,005</td>
-                  <td>Nulla</td>
-                  <td>quis</td>
-                  <td>sem</td>
-                  <td>at</td>
-                </tr>
-                <tr>
-                  <td>1,006</td>
-                  <td>nibh</td>
-                  <td>elementum</td>
-                  <td>imperdiet</td>
-                  <td>Duis</td>
-                </tr>
-                <tr>
-                  <td>1,007</td>
-                  <td>sagittis</td>
-                  <td>ipsum</td>
-                  <td>Praesent</td>
-                  <td>mauris</td>
-                </tr>
-                <tr>
-                  <td>1,008</td>
-                  <td>Fusce</td>
-                  <td>nec</td>
-                  <td>tellus</td>
-                  <td>sed</td>
-                </tr>
-                <tr>
-                  <td>1,009</td>
-                  <td>augue</td>
-                  <td>semper</td>
-                  <td>porta</td>
-                  <td>Mauris</td>
-                </tr>
-                <tr>
-                  <td>1,010</td>
-                  <td>massa</td>
-                  <td>Vestibulum</td>
-                  <td>lacinia</td>
-                  <td>arcu</td>
-                </tr>
-                <tr>
-                  <td>1,011</td>
-                  <td>eget</td>
-                  <td>nulla</td>
-                  <td>className</td>
-                  <td>aptent</td>
-                </tr>
-                <tr>
-                  <td>1,012</td>
-                  <td>taciti</td>
-                  <td>sociosqu</td>
-                  <td>ad</td>
-                  <td>litora</td>
-                </tr>
-                <tr>
-                  <td>1,013</td>
-                  <td>torquent</td>
-                  <td>per</td>
-                  <td>conubia</td>
-                  <td>nostra</td>
-                </tr>
-                <tr>
-                  <td>1,014</td>
-                  <td>per</td>
-                  <td>inceptos</td>
-                  <td>himenaeos</td>
-                  <td>Curabitur</td>
-                </tr>
-                <tr>
-                  <td>1,015</td>
-                  <td>sodales</td>
-                  <td>ligula</td>
-                  <td>in</td>
-                  <td>libero</td>
-                </tr>
+                {
+                  movies.map((movie) =>
+                    <tr key={movie.id}>
+                      <td>{movie.id}</td>
+                      <td>{movie.title}</td>
+                      <td>{movie.sprocketCount}</td>
+                      <td>{movie.owner}</td>
+                    </tr>)
+                }
               </tbody>
             </table>
+          }
           </div>
       </div>
     );
   }
 }
+
+MoviesPage.propTypes = {
+  movies: PropTypes.array,
+  error: PropTypes.string,
+  loading: PropTypes.bool,
+  load: PropTypes.func.isRequired,
+};
+
+export default connect(mapStateToProps, mapActionsToProps)(MoviesPage);
