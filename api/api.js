@@ -3,7 +3,8 @@ require('babel/register')();
 import express from 'express';
 import path from 'path';
 
-import { login, logout } from './actions/auth' 
+import { login, logout } from './actions/auth';
+import * as moviesController from './actions/movies';
 
 var app = express(),
     router = express.Router();  
@@ -24,6 +25,10 @@ app.use(function(req, res, next) {
 
 router.post('/api/login', login);
 router.post('/api/logout', logout);
+
+// actions added for movies
+router.route('/movies')
+  .get(moviesController.getAll)
 
 app.use('/', router);
 
