@@ -6,11 +6,13 @@ import { ReduxRouter } from 'redux-router';
 import { Provider } from 'react-redux';
 import configureStore from './redux-base/configureStore';
 
+import getRoutes from './routes';
+
 const store = configureStore();
 
 ReactDOM.render(
   <Provider store={store}>
-  	<ReduxRouter />
+  	<ReduxRouter routes={getRoutes(store)}/>
   </Provider>,
   document.getElementById('root')
 );
