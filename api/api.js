@@ -1,7 +1,12 @@
-var express = require('express');
-var path = require('path');
+require('babel/register')();
 
-var app = express();
+import express from 'express';
+import path from 'path';
+
+import { login, logout } from './actions/auth' 
+
+var app = express(),
+    router = express.Router();  
 
 var isProduction = process.env.NODE_ENV === 'production';
 var port = isProduction ? process.env.PORT : 3001;
@@ -17,32 +22,10 @@ app.use(function(req, res, next) {
     next();
 });
 
-app.post('/api/login', function(req, res) {
-    const credentials = req.body;
-    if(credentials.userName==='admin@example.com' && credentials.password==='password'){
-      res.json({
-        userName: credentials.userName,
-        role: 'ADMIN'
-      });   
-    }else{
-      // just demonstration of server-side validation
-      res.status('401').send({
-        message : 'Invalid user/password',
-        // userName - the same field name as used in form on client side
-        validationErrors: { 
-          userName : 'Aha, server-side validation error',
-          password: 'Use another password'
-        }
-      });
-    }
-});
+router.post('/api/login', login);
+router.post('/api/logout', logout);
 
-app.post('/api/logout', function(req, res) {
-    res.json({
-      'userName': 'admin', 
-      'role': 'ADMIN'
-    });   
-});
+app.use('/', router);
 
 app.listen(port, function () {
   console.log('Server running on port ' + port);
