@@ -7,10 +7,10 @@ const LOAD_FAIL = 'movies/LOAD_FAIL';
 
 //--------------------------- Reducer function --------------------------
 const initialState = {
-  // loaded: false,
-  // loading: false,
-  // data: null,
-  // error: null
+  loaded: false,
+  loading: true,
+  data: null,
+  error: null
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -42,6 +42,10 @@ export default function reducer(state = initialState, action = {}) {
 }
 
 //--------------------------- Action functions --------------------------
+export function isLoaded(globalState) {
+  return globalState.movies && globalState.movies.loaded;
+}
+
 export function load() {
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],

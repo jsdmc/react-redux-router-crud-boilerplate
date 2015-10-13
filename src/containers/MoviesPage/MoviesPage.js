@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { load } from 'redux-base/modules/movies';
+import { isLoaded, load } from 'redux-base/modules/movies';
 
 const mapStateToProps = state => ({
     movies: state.movies.data,
@@ -11,6 +11,13 @@ const mapStateToProps = state => ({
 const mapActionsToProps = { load };
 
 export class MoviesPage extends Component {
+
+ static fetchData(getState, dispatch) {
+    if (!isLoaded(getState())) {
+      return dispatch(load());
+    }
+  }
+
   render() {
     const { movies, error, loading, load } = this.props;
     let refreshClassName = 'fa fa-refresh';

@@ -8,9 +8,9 @@ import { reducer as formReducer } from 'redux-form';
 import loginFormPlugin from 'containers/LoginPage/loginForm/loginFormPlugin';
 
 export default combineReducers({
+  router,
   auth,
   counter,
-  movies,
-  router,
-  form: formReducer.plugin(loginFormPlugin)
+  form: formReducer.plugin(loginFormPlugin),
+  movies
 });
