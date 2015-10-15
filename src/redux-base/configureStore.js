@@ -1,15 +1,15 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import promiseMiddleware from './middleware/promiseMiddleware'
+import promiseMiddleware from './middleware/promiseMiddleware';
 import transitionMiddleware from './middleware/transitionMiddleware';
 import { reduxReactRouter } from 'redux-router';
 import createHistory from 'history/lib/createBrowserHistory';
 import reducer from './modules/reducer';
 import config from 'config';
 
-let middlewares = [
+const middlewares = [
   transitionMiddleware,
-  thunk, 
+  thunk,
   promiseMiddleware
 ];
 

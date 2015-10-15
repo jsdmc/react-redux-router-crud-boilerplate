@@ -1,20 +1,20 @@
-//--------------------------- Action constants --------------------------
+// --------------------------- Action constants --------------------------
 export const INCREMENT_COUNTER = 'INCREMENT_COUNTER';
 export const DECREMENT_COUNTER = 'DECREMENT_COUNTER';
 
-//--------------------------- Reducer function --------------------------
+// --------------------------- Reducer function --------------------------
 export default function counter(state = 0, action) {
   switch (action.type) {
-  case INCREMENT_COUNTER:
-    return state + 1;
-  case DECREMENT_COUNTER:
-    return state - 1;
-  default:
-    return state;
+    case INCREMENT_COUNTER:
+      return state + 1;
+    case DECREMENT_COUNTER:
+      return state - 1;
+    default:
+      return state;
   }
 }
 
-//--------------------------- Action functions --------------------------
+// --------------------------- Action functions --------------------------
 export function increment() {
   return {
     type: INCREMENT_COUNTER
@@ -29,9 +29,9 @@ export function decrement() {
 
 export function incrementIfOdd() {
   return (dispatch, getState) => {
-    const { counter } = getState();
+    const { counterState } = getState();
 
-    if (counter % 2 === 0) {
+    if (counterState % 2 === 0) {
       return;
     }
 

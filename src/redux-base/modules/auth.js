@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-//--------------------------- Action constants --------------------------
+// --------------------------- Action constants --------------------------
 
 // names for actions can be more specific
 const LOGIN = 'LOGIN';
@@ -12,7 +12,7 @@ const LOGOUT = 'LOGOUT';
 const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 const LOGOUT_FAIL = 'LOGOUT_FAIL';
 
-//--------------------------- Reducer function --------------------------
+// --------------------------- Reducer function --------------------------
 
 const initialState = {
   // user: null,
@@ -30,7 +30,7 @@ export default function auth(state = initialState, action = {}) {
         ...state,
         loggingIn: true
       };
-      
+
     case LOGIN_SUCCESS:
       return {
         ...state,
@@ -38,7 +38,7 @@ export default function auth(state = initialState, action = {}) {
         user: action.result.data,
         role: action.result.data.role
       };
-    
+
     case LOGIN_FAIL:
       return {
         ...state,
@@ -71,7 +71,7 @@ export default function auth(state = initialState, action = {}) {
   }
 }
 
-//--------------------------- Action functions --------------------------
+// --------------------------- Action functions --------------------------
 
 export function login(userName, password) {
   return {

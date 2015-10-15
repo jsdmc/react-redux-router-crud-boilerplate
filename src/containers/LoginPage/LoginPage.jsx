@@ -49,18 +49,18 @@ class Login extends Component {
     this.props.dispatch(login(data.userName, data.password));
   }
 
-  render(){
-    const styles =  require('./LoginPage.scss');
+  render() {
+    const styles = require('./LoginPage.scss');
 
     // grab props related to redux-form
     const { user, loginError, fields: {userName, password, rememberMe}, handleSubmit } = this.props;
 
-    const fieldClasses = (field, classes) => classnames(classes, { 
+    const fieldClasses = (field, classes) => classnames(classes, {
       'has-error': field.error && field.touched
     });
     const errorBlock = (field) => ( field.error && field.touched && <small className="help-block">{field.error}</small> );
 
-    return(
+    return (
       <div className={'container ' + styles.loginPage}>
         <div className="row">
           <div className="col-md-4 col-md-offset-4 col-sm-5 col-sm-offset-5">
@@ -69,12 +69,12 @@ class Login extends Component {
                 <h3 className="panel-title">Please Log in</h3>
               </div>
               <form className="form-signin" onSubmit={handleSubmit(::this.handleLogin)}>
-                
+
                 <div className={fieldClasses(userName, 'form-group')}>
                   <div className="input-group">
                     <span className="input-group-addon"><i className="fa fa-user"/></span>
                     { /* // will pass value, onBlur and onChange */ }
-                    <input type="text" className="form-control" {...userName} placeholder="Username" autofocus/>
+                    <input type="text" className="form-control" {...userName} placeholder="Username" autoFocus/>
                   </div>
                   {errorBlock(userName)}
                 </div>
@@ -97,18 +97,18 @@ class Login extends Component {
                 </div>
 
                 {
-                  !user && loginError && 
-                  <div className="alert alert-danger">              
+                  !user && loginError &&
+                  <div className="alert alert-danger">
                     {loginError.message} Hint: use admin@example.com/password to log in.
                   </div>
                 }
-       
+
                 <button className="btn btn-primary btn-block" onSubmit={handleSubmit(::this.handleLogin)}><i className="fa fa-sign-in"/>{' '}Log in</button>
               </form>
             </div>
           </div>
         </div>
-      </div> 
+      </div>
     );
   }
 }
@@ -119,9 +119,10 @@ Login.propTypes = {
   dispatch: PropTypes.func.isRequired,
   // redux-form related props
   fields: PropTypes.object.isRequired,
-  handleSubmit: PropTypes.func.isRequired 
+  handleSubmit: PropTypes.func.isRequired
 };
 
 // export the wrapped with decorators component
-// of course '@' syntax can be used. But Sun approach helps to test component later 
+// of course '@' syntax can be used. But Sun approach helps to test component later
 export default connect(mapStateToProps)(connectReduxForm(reduxFormConfig)(Login));
+

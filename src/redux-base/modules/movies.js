@@ -1,11 +1,11 @@
 import axios from 'axios';
 
-//--------------------------- Action constants --------------------------
+// --------------------------- Action constants --------------------------
 const LOAD = 'movies/LOAD';
 const LOAD_SUCCESS = 'movies/LOAD_SUCCESS';
 const LOAD_FAIL = 'movies/LOAD_FAIL';
 
-//--------------------------- Reducer function --------------------------
+// --------------------------- Reducer function --------------------------
 const initialState = {
   loaded: false,
   loading: true,
@@ -41,7 +41,7 @@ export default function reducer(state = initialState, action = {}) {
   }
 }
 
-//--------------------------- Action functions --------------------------
+// --------------------------- Action functions --------------------------
 export function isLoaded(globalState) {
   return globalState.movies && globalState.movies.loaded;
 }

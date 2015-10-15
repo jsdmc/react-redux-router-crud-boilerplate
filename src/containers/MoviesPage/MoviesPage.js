@@ -3,23 +3,25 @@ import { connect } from 'react-redux';
 import { isLoaded, load } from 'redux-base/modules/movies';
 
 const mapStateToProps = state => ({
-    movies: state.movies.data,
-    error: state.movies.error,
-    loading: state.movies.loading
+  movies: state.movies.data,
+  error: state.movies.error,
+  loading: state.movies.loading
 });
 
 const mapActionsToProps = { load };
 
 export class MoviesPage extends Component {
 
- static fetchData(getState, dispatch) {
+  // static method fetchData that returns Promise. Use that when you need to preload data for some page
+  // in transitionMiddlaware
+  static fetchData(getState, dispatch) {
     if (!isLoaded(getState())) {
       return dispatch(load());
     }
   }
 
   render() {
-    const { movies, error, loading, load } = this.props;
+    const { movies, error, loading } = this.props;
     let refreshClassName = 'fa fa-refresh';
     if (loading) {
       refreshClassName += ' fa-spin';
@@ -56,7 +58,7 @@ export class MoviesPage extends Component {
 
           <h2 className="sub-header">Movies</h2>
 
-          <button className={styles.refreshBtn + ' btn btn-success'} onClick={load}><i
+          <button className={styles.refreshBtn + ' btn btn-success'} onClick={this.props.load}><i
             className={refreshClassName}/> {' '} Reload movies
           </button>
 

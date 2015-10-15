@@ -12,7 +12,7 @@ export default (store) => {
     }
   };
 
- 	return (
+  return (
 		<Route component={CoreLayout}>
 			<Route path="login" component={LoginPage} />
 			<Route path="counter" component={Counter}/>

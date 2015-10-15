@@ -29,19 +29,19 @@ class Header extends Component {
             <ul className="nav navbar-nav navbar-right">
               <li className="dropdown">
                 <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                  <span className='fa fa-user header_fa'></span>{ user && user.userName || 'Anonymous'}<span className="caret"></span>
+                  <span className="fa fa-user header_fa"></span>{ user && user.userName || 'Anonymous'}<span className="caret"></span>
                 </a>
                 <ul className="dropdown-menu">
                   <li><a href="#">Settings</a></li>
                   <li><a href="#">Profile</a></li>
-                  <li className="logout-link"><a href="#" onClick={e=>this.onLogoutClick(e)}><i className="fa fa-sign-out header_fa"/>Log out</a></li>
-                 
-                  <li role="separator" className="divider"></li>                    
+                  <li className="logout-link"><a href="#" onClick={event=>this.onLogoutClick(event)}><i className="fa fa-sign-out header_fa"/>Log out</a></li>
+
+                  <li role="separator" className="divider"></li>
                   <li>
                     <a href="https://github.com/cloudmu/react-redux-starter-kit"target="_blank" title="View on Github"><i className="fa fa-github header_fa"/>Github</a>
                   </li>
                 </ul>
-              </li>           
+              </li>
             </ul>
             <ul className="nav navbar-nav navbar-right">
               <li><a href="#">Dashboard</a></li>
