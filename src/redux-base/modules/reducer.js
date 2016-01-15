@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 
 import counter from './counter';
+import customCounter from './customCounter';
 import auth from './auth';
 import movies from './movies';
 import { routerStateReducer as router } from 'redux-router';
@@ -52,7 +53,7 @@ export default combineReducers({
     counter2: counter,
     counter3: counter
   }),
-  someCustomCounter: customReducer(counter, 'customCounter'), // <-- that key need to be in action
+  someCustomCounter: customReducer(customCounter, 'customCounter'), // <-- catch actions that contain the key
   form: formReducer.plugin(loginFormPlugin),
   movies
 });
