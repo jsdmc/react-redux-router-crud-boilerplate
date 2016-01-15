@@ -3,7 +3,7 @@ export const INCREMENT_COUNTER = 'INCREMENT_COUNTER';
 export const DECREMENT_COUNTER = 'DECREMENT_COUNTER';
 
 // --------------------------- Reducer function --------------------------
-export default function counter(state = 0, action) {
+export default function counter(state = 0, action = {}) {
   switch (action.type) {
     case INCREMENT_COUNTER:
       return state + 1;

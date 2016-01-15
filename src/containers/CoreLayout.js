@@ -17,6 +17,7 @@ export default class CoreLayout extends Component {
             <div className="col-sm-3 col-md-2 sidebar">
               <ul className="nav nav-sidebar">
                 <SmartLink url="/counter" title="Counter" />
+                <SmartLink url="/countersPage" title="CountersPage" />
                 <SmartLink url="/autoCounter" title="AutoCounter" />
                 <SmartLink url="/movies" title="Movies page" />
               </ul>

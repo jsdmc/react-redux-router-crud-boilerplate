@@ -13,7 +13,7 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(CounterActions, dispatch);
 }
 
-class Counter extends Component {
+export class Counter extends Component {
   render() {
     const { increment, incrementIfOdd, incrementAsync, decrement, counter } = this.props;
     return (
