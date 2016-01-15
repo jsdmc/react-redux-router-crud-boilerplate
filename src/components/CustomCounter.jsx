@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Counter } from './Counter';
-import {connectMultireducer, multireducerBindActionCreators} from 'multireducer-adailey14';
+import { connect } from 'react-redux';
+import { multireducerBindActionCreators } from 'multireducer-adailey14';
 import * as CounterActions from 'redux-base/modules/counter';
 
 const mapStateToProps = (state) => {
@@ -25,4 +26,4 @@ class CounterMulti extends Component {
   }
 }
 
-export default connectMultireducer(mapStateToProps, mapDispatchToProps)(CounterMulti);
+export default connect(mapStateToProps, mapDispatchToProps)(CounterMulti);
