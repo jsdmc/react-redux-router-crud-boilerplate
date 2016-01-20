@@ -13,7 +13,7 @@ const store = configureStore();
 
 ReactDOM.render(
   <Provider store={store}>
-  	<ReduxRouter routes={getRoutes(store)}/>
+    <ReduxRouter routes={getRoutes(store)}/>
   </Provider>,
   document.getElementById('root')
 );

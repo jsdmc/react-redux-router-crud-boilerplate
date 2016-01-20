@@ -23,6 +23,13 @@ export function increment100() {
   };
 }
 
+// let's say it's some action imported from some duck or other module
+const anotherThunkAction = () => {
+  return (dispatch) => {
+    dispatch({ type: 'HELLO_ACTION_ASYNC'});
+  };
+};
+
 export function decrement100Async() {
   return (dispatch, getState, dispatchGlobal) => {
 
@@ -32,10 +39,12 @@ export function decrement100Async() {
 
     dispatch({ type: DECREMENT100_ASYNC });
 
-    dispatchGlobal({ type: 'INCREMENT_COUNTER'});
+    // Lets decrement global counter
+    dispatchGlobal({ type: 'DECREMENT_COUNTER'});
 
-    dispatchGlobal({ type: 'HELLO_ACTION'});
-
-    dispatchGlobal((() => (dispatch1) => dispatch1({ type: 'HELLO_ACTION_ASYNC'}))());
+    // we can dispatch thunks to global namespace
+    // and from within the thunk action also will be dispatched as global -
+    // means action type will contain reducer key specified for sonnected component
+    dispatchGlobal(anotherThunkAction());
   };
 }
