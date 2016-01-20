@@ -5,13 +5,21 @@ import { connectMultireducer } from 'multireducer';
 
 import * as CounterActions from 'redux-base/modules/counter';
 
-const mapStateToProps = (key, state) => {
+// function parameters are the same as in mapStateToProps from 'react-redux'
+// except 1st parameter which is always multireducer key
+const mapStateToProps = (key, state, ownProps) => {
+  //
+  console.log(ownProps.testProp);
+
   return {
     counter: state.multiCounters[key]
   };
 };
 
-// const mapDispatchToProps = (key, dispatch) => {
+// function parameters are the same as in mapDispatchToProps from 'react-redux'
+// except 1st parameter which is always multireducer key
+
+// const mapDispatchToProps = (key, dispatch, ownProps) => {
 //   return multireducerBindActionCreators(key, CounterActions, dispatch);
 // };
 

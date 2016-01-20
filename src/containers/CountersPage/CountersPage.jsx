@@ -13,7 +13,7 @@ export class CountesPage extends Component {
         </div>
         <div>
           Counter1
-          <CounterMulti multireducerKey="counter1"/>
+          <CounterMulti testProp="1st" multireducerKey="counter1"/>
         </div>
         <div>
           Counter2
@@ -21,7 +21,7 @@ export class CountesPage extends Component {
         </div>
         <div>
           Counter3
-          <CounterMulti multireducerKey="counter3"/>
+          <CounterMulti testProp="3rd" multireducerKey="counter3"/>
         </div>
         <div>
           <CustomCounter />
