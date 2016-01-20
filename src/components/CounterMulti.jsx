@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Counter } from './Counter';
-import {connectMultireducer, multireducerBindActionCreators} from 'multireducer';
+import { connectMultireducer } from 'multireducer';
+// import { multireducerBindActionCreators } from 'multireducer';
+
 import * as CounterActions from 'redux-base/modules/counter';
 
 const mapStateToProps = (key, state) => {
@@ -9,9 +11,9 @@ const mapStateToProps = (key, state) => {
   };
 };
 
-const mapDispatchToProps = (key, dispatch) => {
-  return multireducerBindActionCreators(key, CounterActions, dispatch);
-};
+// const mapDispatchToProps = (key, dispatch) => {
+//   return multireducerBindActionCreators(key, CounterActions, dispatch);
+// };
 
 class CounterMulti extends Component {
   render() {
@@ -25,4 +27,10 @@ class CounterMulti extends Component {
   }
 }
 
-export default connectMultireducer(mapStateToProps, mapDispatchToProps)(CounterMulti);
+// Can be mounted in both ways
+// 1st one is more flexible, because in mapDispatchToProps function
+// you can also return actions that should't be bound with multireducerKey for this component
+// 2nd way - see CustomCounter.jsx example
+
+// export default connectMultireducer(mapStateToProps, mapDispatchToProps)(CounterMulti);
+export default connectMultireducer(mapStateToProps, CounterActions)(CounterMulti);
