@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { bindActionCreators } from 'redux';
+// import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as CounterActions from 'redux-base/modules/counter';
 
@@ -9,9 +9,9 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators(CounterActions, dispatch);
-}
+// function mapDispatchToProps(dispatch) {
+//   return bindActionCreators(CounterActions, dispatch);
+// }
 
 export class Counter extends Component {
   render() {
@@ -40,4 +40,4 @@ Counter.propTypes = {
   counter: PropTypes.number.isRequired
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Counter);
+export default connect(mapStateToProps, CounterActions)(Counter);

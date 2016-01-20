@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import { Counter } from './Counter';
-import {connectMultireducer, multireducerBindActionCreators} from 'multireducer-adailey14';
+import {connectMultireducer, multireducerBindActionCreators} from 'multireducer';
 import * as CounterActions from 'redux-base/modules/counter';
 
-const mapStateToProps = (state, key) => {
+const mapStateToProps = (key, state) => {
   return {
     counter: state.multiCounters[key]
   };
 };
 
-const mapDispatchToProps = (dispatch, key) => {
-  return multireducerBindActionCreators(CounterActions, key, dispatch);
+const mapDispatchToProps = (key, dispatch) => {
+  return multireducerBindActionCreators(key, CounterActions, dispatch);
 };
 
 class CounterMulti extends Component {

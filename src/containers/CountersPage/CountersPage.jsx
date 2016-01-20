@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { CounterMulti, CustomCounter } from 'components';
+import { Counter, CounterMulti, CustomCounter } from 'components';
 
 export class CountesPage extends Component {
 
@@ -7,6 +7,10 @@ export class CountesPage extends Component {
 
     return (
       <div>
+        <div>
+          Global Counter
+          <Counter />
+        </div>
         <div>
           Counter1
           <CounterMulti multireducerKey="counter1"/>
