@@ -3,7 +3,7 @@ import { Counter } from './Counter';
 import { connectMultireducer } from 'multireducer';
 // import { multireducerBindActionCreators } from 'multireducer';
 
-import * as CounterActions from 'redux-base/modules/counter';
+import * as CounterActions from 'redux-base/modules/multiCounter';
 
 // function parameters are the same as in mapStateToProps from 'react-redux'
 // except 1st parameter which is always multireducer key
@@ -23,7 +23,7 @@ const mapStateToProps = (key, state, ownProps) => {
 //   return multireducerBindActionCreators(key, CounterActions, dispatch);
 // };
 
-class CounterMulti extends Component {
+export class CounterMulti extends Component {
   render() {
 
     return (

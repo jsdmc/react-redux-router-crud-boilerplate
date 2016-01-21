@@ -1,10 +1,9 @@
 import React, { Component, PropTypes } from 'react';
-import { Counter } from './Counter';
+import { CounterMulti } from './CounterMulti';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { multireducerBindActionCreators } from 'multireducer';
-import * as CounterActions from 'redux-base/modules/counter';
-import * as CustomCounterActions from 'redux-base/modules/customCounter';
+import * as CounterActions from 'redux-base/modules/customCounter';
 
 const customActions = {
   hello: () => {
@@ -18,14 +17,14 @@ const customActions = {
 
 const mapStateToProps = (state) => {
   return {
-    counter: state.someCustomCounter
+    counter: state.myNamespace.someCustomCounter
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     ...bindActionCreators(customActions, dispatch),
-    ...multireducerBindActionCreators('customCounter', { ...CounterActions, ...CustomCounterActions }, dispatch)
+    ...multireducerBindActionCreators('customCounter', { ...CounterActions }, dispatch)
   };
 };
 
@@ -37,7 +36,7 @@ class CustomCounter extends Component {
     return (
       <div>
         Custom counter
-        <Counter { ...restProps } />
+        <CounterMulti { ...restProps } />
         <button onClick={increment100}>+100</button>
         <button onClick={decrement100Async}>-100</button>
         <button onClick={hello}>HELLO action</button>

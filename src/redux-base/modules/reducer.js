@@ -19,7 +19,9 @@ export default combineReducers({
     counter2: counter,
     counter3: counter
   }),
-  someCustomCounter: multireducer(customCounter, 'customCounter'), // <-- catch actions that contain the key
+  myNamespace: combineReducers({
+    someCustomCounter: multireducer(customCounter, 'customCounter'), // <-- catch actions that contain the key
+  }),
   form: formReducer.plugin(loginFormPlugin),
   movies
 });

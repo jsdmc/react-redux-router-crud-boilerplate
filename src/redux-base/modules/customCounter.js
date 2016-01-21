@@ -1,4 +1,4 @@
-import baseCounter from './counter';
+import baseCounter from './multiCounter';
 
 // --------------------------- Action constants --------------------------
 const INCREMENT100 = 'INCREMENT100';
@@ -16,7 +16,24 @@ export default function counter(state = 0, action = {}) {
   }
 }
 
+import { increment } from './multiCounter';
+// re-export other actions
+export { INCREMENT_COUNTER, DECREMENT_COUNTER, increment, decrement, incrementAsync } from './multiCounter';
+
 // --------------------------- Action functions --------------------------
+export function incrementIfOdd() {
+  return (dispatch, getState) => {
+    const { myNamespace: { someCustomCounter: counterState } } = getState();
+
+    if (counterState % 2 === 0) {
+      return;
+    }
+
+    dispatch(increment());
+  };
+}
+
+
 export function increment100() {
   return {
     type: INCREMENT100

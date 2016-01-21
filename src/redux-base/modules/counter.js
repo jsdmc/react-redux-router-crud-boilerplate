@@ -29,7 +29,7 @@ export function decrement() {
 
 export function incrementIfOdd() {
   return (dispatch, getState) => {
-    const { counterState } = getState();
+    const { counter: counterState } = getState();
 
     if (counterState % 2 === 0) {
       return;
