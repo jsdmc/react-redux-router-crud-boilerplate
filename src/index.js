@@ -11,19 +11,28 @@ import config from 'config';
 
 const store = configureStore();
 
-ReactDOM.render(
-  <Provider store={store}>
-    <ReduxRouter routes={getRoutes(store)}/>
-  </Provider>,
-  document.getElementById('root')
-);
+let appRootComponent;
 
 if (!config.isProduction) {
-  // Use require because imports can't be conditional.
+	// Use require because imports can't be conditional.
   // In production, you should ensure process.env.NODE_ENV
   // is envified so that Uglify can eliminate this
   // module and its dependencies as dead code.
-  require('./utils/createDevToolsWindow')(store);
-
+  const DevTools = require('utils/DevTools').default;
+  appRootComponent = () => (
+    <Provider store={store}>
+      <div>
+        <ReduxRouter routes={getRoutes(store)}/>
+        <DevTools />
+      </div>
+    </Provider>
+  );
+} else {
+  appRootComponent = () => (
+    <Provider store={store}>
+      <ReduxRouter routes={getRoutes(store)}/>
+    </Provider>
+  );
 }
 
+ReactDOM.render(appRootComponent(), document.getElementById('root'));

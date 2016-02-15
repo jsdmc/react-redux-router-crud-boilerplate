@@ -17,8 +17,8 @@ let createFinalStore;
 
 // use only for dev mode
 if (!config.isProduction) {
-  const devtools = require('redux-devtools').devTools;
-  createFinalStore = compose(applyMiddleware(...middlewares), devtools())(createStore);
+  const DevTools = require('utils/DevTools').default;
+  createFinalStore = compose(applyMiddleware(...middlewares), DevTools.instrument())(createStore);
 } else {
   createFinalStore = applyMiddleware(...middlewares)(createStore);
 }

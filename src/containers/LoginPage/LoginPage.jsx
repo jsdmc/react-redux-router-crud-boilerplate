@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { pushState } from 'redux-router';
-import { connectReduxForm } from 'redux-form';
+import { reduxForm } from 'redux-form';
 import { login } from 'redux-base/modules/auth';
 import loginFormValidation from './loginForm/loginFormValidation';
 import classnames from 'classnames';
@@ -124,5 +124,5 @@ Login.propTypes = {
 
 // export the wrapped with decorators component
 // of course '@' syntax can be used. But Sun approach helps to test component later
-export default connect(mapStateToProps)(connectReduxForm(reduxFormConfig)(Login));
+export default reduxForm(reduxFormConfig, mapStateToProps)(Login);
 
