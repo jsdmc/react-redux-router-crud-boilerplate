@@ -5,7 +5,7 @@ import { Counter, AutoCounter } from './components';
 
 export default (store) => {
   const requireLogin = (nextState, replaceState) => {
-    const { auth: { user }} = store.getState();
+    const { auth: { user } } = store.getState();
     if (!user) {
       // oops, not logged in, so can't be here!
       replaceState(null, '/login');
@@ -16,7 +16,7 @@ export default (store) => {
 		<Route component={CoreLayout}>
 			<Route path="login" component={LoginPage} />
 			<Route path="counter" component={Counter}/>
-      <Route path="countersPage" component={CountersPage}/>
+		<Route path="countersPage" component={CountersPage}/>
 			<Route path="autoCounter" component={AutoCounter} />
 			<Route onEnter={requireLogin}>
 				<Route path="movies" component={MoviesPage} />

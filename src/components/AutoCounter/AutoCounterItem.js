@@ -5,7 +5,7 @@ export default class AutoCounterItem extends Component {
   propTypes = {
     increment: PropTypes.string.number,
     color: PropTypes.string.isRequired,
-  }
+  };
 
   constructor(props) {
     super(props);

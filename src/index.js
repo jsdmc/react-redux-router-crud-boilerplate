@@ -24,4 +24,6 @@ if (!config.isProduction) {
   // is envified so that Uglify can eliminate this
   // module and its dependencies as dead code.
   require('./utils/createDevToolsWindow')(store);
+
 }
+

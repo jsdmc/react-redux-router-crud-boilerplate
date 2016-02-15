@@ -8,6 +8,7 @@ module.exports = {
   devtool: 'source-map',
   entry: {
     bundle: [
+      'eventsource-polyfill', // necessary for hot reloading with IE
       'webpack-hot-middleware/client',
       './src/index'
     ]
@@ -34,14 +35,14 @@ module.exports = {
     // new ExtractTextPlugin('../dist/styles.css')
   ],
   module: {
-    preLoaders: [
-      {
-        test: /\.(js|jsx)$/,
-        loaders: ['eslint'],
-        include: path.resolve(ROOT_PATH, 'src'),
-        exclude: /node_modules/
-      }
-    ],
+    // preLoaders: [
+    //   {
+    //     test: /\.(js|jsx)$/,
+    //     loaders: ['eslint'],
+    //     include: path.resolve(ROOT_PATH, 'src'),
+    //     exclude: /node_modules/
+    //   }
+    // ],
     loaders: [
       {
         test: /\.(js|jsx)$/,

@@ -1,10 +1,14 @@
 {
-  "extends": "eslint-config-airbnb",
+  "ecmaFeatures": {
+    "jsx": true,
+    "modules": true
+  },
+  //"extends": "eslint-config-airbnb",
   "env": {
     "browser": true,
     "node": true
   },
-  "parser": "babel-eslint",
+  //"parser": "babel-eslint",
   "rules": {
     "react/jsx-uses-react": 2,
     "react/jsx-uses-vars": 2,
@@ -18,9 +22,11 @@
     "comma-dangle": 0,  // not sure why airbnb turned this on. gross!
     "indent": [2, 2, {"SwitchCase": 1}],
     "no-console": 0,
-    "no-alert": 0
+    "no-alert": 0,
+    "max-len": [2, 300, 4]
   },
   "plugins": [
+    //"babel",
     "react"
   ]
 }
