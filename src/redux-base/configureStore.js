@@ -1,19 +1,19 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import promiseMiddleware from './middleware/promiseMiddleware';
-import transitionMiddleware from './middleware/transitionMiddleware';
-import { reduxReactRouter } from 'redux-router';
-import createHistory from 'history/lib/createBrowserHistory';
+import { syncHistory } from 'react-router-redux';
+import { browserHistory } from 'react-router';
 import reducer from './modules/reducer';
 import config from 'config';
 
+const syncHistoryMiddleware = syncHistory(browserHistory);
+
 const middlewares = [
   applyMiddleware(
-    transitionMiddleware,
     thunk,
-    promiseMiddleware
-  ),
-  reduxReactRouter({ createHistory })
+    promiseMiddleware,
+    syncHistoryMiddleware
+  )
 ];
 
 // use only for dev mode
@@ -29,12 +29,16 @@ export default function configureStore(initialState) {
     compose(...middlewares)
   );
 
-  if (!config.isProduction && module.hot) {
-    // Enable Webpack hot module replacement for reducers
-    module.hot.accept('./modules/reducer', () => {
-      const nextReducer = require('./modules/reducer');
-      store.replaceReducer(nextReducer);
-    });
+  if (!config.isProduction) {
+    syncHistoryMiddleware.listenForReplays(store);
+
+    if (module.hot) {
+      // Enable Webpack hot module replacement for reducers
+      module.hot.accept('./modules/reducer', () => {
+        const nextReducer = require('./modules/reducer');
+        store.replaceReducer(nextReducer);
+      });
+    }
   }
 
   return store;

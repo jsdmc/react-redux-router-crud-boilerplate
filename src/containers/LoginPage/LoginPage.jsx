@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { pushState } from 'redux-router';
+import { push } from 'react-router-redux';
 import { reduxForm } from 'redux-form';
 import { login } from 'redux-base/modules/auth';
 import loginFormValidation from './loginForm/loginFormValidation';
@@ -39,7 +39,7 @@ class Login extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.user) {
       // logged in, let's show home
-      this.props.dispatch(pushState(null, '/counter'));
+      this.props.dispatch(push({ pathname: '/counter' }));
     }
   }
 

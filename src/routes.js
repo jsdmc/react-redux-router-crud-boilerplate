@@ -4,11 +4,11 @@ import { CoreLayout, MoviesPage, LoginPage, CountersPage } from './containers';
 import { Counter, AutoCounter } from './components';
 
 export default (store) => {
-  const requireLogin = (nextState, replaceState) => {
+  const requireLogin = (nextState, replace) => {
     const { auth: { user } } = store.getState();
     if (!user) {
       // oops, not logged in, so can't be here!
-      replaceState(null, '/login');
+      replace({ pathname: '/login' });
     }
   };
 

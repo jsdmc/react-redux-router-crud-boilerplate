@@ -1,7 +1,7 @@
 // react should be included when use ReactDom
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { ReduxRouter } from 'redux-router';
+import { Router, browserHistory } from 'react-router';
 
 import { Provider } from 'react-redux';
 import configureStore from './redux-base/configureStore';
@@ -22,7 +22,7 @@ if (!config.isProduction) {
   appRootComponent = () => (
     <Provider store={store}>
       <div>
-        <ReduxRouter routes={getRoutes(store)}/>
+        <Router history={browserHistory} routes={getRoutes(store)}/>
         <DevTools />
       </div>
     </Provider>
@@ -30,7 +30,7 @@ if (!config.isProduction) {
 } else {
   appRootComponent = () => (
     <Provider store={store}>
-      <ReduxRouter routes={getRoutes(store)}/>
+      <Router history={browserHistory} routes={getRoutes(store)}/>
     </Provider>
   );
 }

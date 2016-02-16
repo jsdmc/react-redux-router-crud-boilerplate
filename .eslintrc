@@ -19,14 +19,15 @@
     "react/jsx-uses-react": 2,
     "react/jsx-uses-vars": 2,
     "react/react-in-jsx-scope": 2,
-    
+
     //overrides
     "max-len": [2, 300, 4],
     "comma-dangle": 0,
     "react/jsx-indent-props": 0,
     "react/jsx-no-bind": 0,
     "no-console": 0,
-    "padded-blocks": 0
+    "padded-blocks": 0,
+    "no-debugger": 0
   },
   "plugins": [
     "babel",

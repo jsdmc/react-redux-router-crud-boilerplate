@@ -5,18 +5,19 @@ import { isLoaded, load } from 'redux-base/modules/movies';
 const mapStateToProps = state => ({
   movies: state.movies.data,
   error: state.movies.error,
-  loading: state.movies.loading
+  loading: state.movies.loading,
+  isDataLoaded: isLoaded(state)
 });
 
 const mapActionsToProps = { load };
 
 export class MoviesPage extends Component {
 
-  // static method fetchData that returns Promise. Use that when you need to preload data for some page
-  // in transitionMiddlaware
-  static fetchData(getState, dispatch) {
-    if (!isLoaded(getState())) {
-      return dispatch(load());
+  componentWillMount() {
+    const { isDataLoaded, load: loadData } = this.props;
+
+    if (!isDataLoaded) {
+      loadData();
     }
   }
 
@@ -113,6 +114,7 @@ MoviesPage.propTypes = {
   error: PropTypes.string,
   loading: PropTypes.bool,
   load: PropTypes.func.isRequired,
+  isDataLoaded: PropTypes.bool.isRequired
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(MoviesPage);

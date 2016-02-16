@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 // Smart component that listens to url changes and rerenders inself
 // Decorator @connect no used for testability reasons.
 // Instead, function defined on top of component. It's more readable
-const mapStateToProps = (state) => ({ routerState: state.router });
+const mapStateToProps = (state) => ({ location: state.routing.location });
 
 class SmartLink extends Component {
   render() {
@@ -14,8 +14,8 @@ class SmartLink extends Component {
     // Sinse the are unique by default (specified in webpack config) - you can be sure you will not breake global styles
     const styles = require('./SmartLink.scss');
 
-    const { title, url, routerState } = this.props;
-    const active = routerState.location.pathname === url;
+    const { title, url, location } = this.props;
+    const active = location.pathname === url;
     return (
       <li className={classnames({ [styles.activeLink]: active, active })} >
         {/* Objects literal features - Computed property names, Shorthand property names - ES6
@@ -29,7 +29,7 @@ class SmartLink extends Component {
 
             Functionality of SmartLink just shows how smart compoments should work.
         */}
-        <Link activeClassName="active" to={url}>
+        <Link activeClassName="active" to={{ pathname: url }}>
           <span>{title}</span>
         </Link>
       </li>
@@ -43,7 +43,7 @@ class SmartLink extends Component {
 SmartLink.propTypes = {
   title: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
-  routerState: PropTypes.object.isRequired
+  location: PropTypes.object.isRequired
 };
 
 export default connect(mapStateToProps)(SmartLink);
