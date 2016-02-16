@@ -2,10 +2,10 @@ import React, { Component, PropTypes } from 'react';
 
 export default class AutoCounterItem extends Component {
 
-  propTypes = {
-    increment: PropTypes.string.number,
+  static propTypes = {
+    increment: PropTypes.number.isRequired,
     color: PropTypes.string.isRequired,
-  };
+  }
 
   constructor(props) {
     super(props);
