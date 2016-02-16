@@ -6,7 +6,7 @@ import './Header.scss';
 const mapStateToProps = (state) => ({ user: state.auth.user });
 
 class Header extends Component {
-  onLogoutClick() {
+  onLogoutClick(event) {
     event.preventDefault();
     // this.props.handleLogout();
   }
@@ -34,7 +34,7 @@ class Header extends Component {
                 <ul className="dropdown-menu">
                   <li><a href="#">Settings</a></li>
                   <li><a href="#">Profile</a></li>
-                  <li className="logout-link"><a href="#" onClick={event=>this.onLogoutClick(event)}><i className="fa fa-sign-out header_fa"/>Log out</a></li>
+                  <li className="logout-link"><a href="#" onClick={this.onLogoutClick}><i className="fa fa-sign-out header_fa"/>Log out</a></li>
 
                   <li role="separator" className="divider"></li>
                   <li>

@@ -35,14 +35,14 @@ module.exports = {
     // new ExtractTextPlugin('../dist/styles.css')
   ],
   module: {
-    // preLoaders: [
-    //   {
-    //     test: /\.(js|jsx)$/,
-    //     loaders: ['eslint'],
-    //     include: path.resolve(ROOT_PATH, 'src'),
-    //     exclude: /node_modules/
-    //   }
-    // ],
+    preLoaders: [
+      {
+        test: /\.(js|jsx)$/,
+        loaders: ['eslint'],
+        include: path.resolve(ROOT_PATH, 'src'),
+        exclude: /node_modules/
+      }
+    ],
     loaders: [
       {
         test: /\.(js|jsx)$/,

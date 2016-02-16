@@ -77,7 +77,7 @@ export function login(userName, password) {
   return {
     types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL],
     promise: axios
-      .post('http://localhost:3001/api/login', { userName, password: password })
+      .post('http://localhost:3001/api/login', { userName, password })
   };
 }
 

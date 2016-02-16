@@ -15,18 +15,14 @@ const customActions = {
   }
 };
 
-const mapStateToProps = (state) => {
-  return {
-    counter: state.myNamespace.someCustomCounter
-  };
-};
+const mapStateToProps = (state) => ({
+  counter: state.myNamespace.someCustomCounter
+});
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    ...bindActionCreators(customActions, dispatch),
-    ...multireducerBindActionCreators('customCounter', { ...CounterActions }, dispatch)
-  };
-};
+const mapDispatchToProps = (dispatch) => ({
+  ...bindActionCreators(customActions, dispatch),
+  ...multireducerBindActionCreators('customCounter', { ...CounterActions }, dispatch)
+});
 
 class CustomCounter extends Component {
   render() {

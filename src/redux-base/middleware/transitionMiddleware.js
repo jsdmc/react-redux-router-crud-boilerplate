@@ -1,4 +1,4 @@
-import {ROUTER_DID_CHANGE} from 'redux-router/lib/constants';
+import { ROUTER_DID_CHANGE } from 'redux-router/lib/constants';
 import shallowequal from 'shallowequal';
 import getDataDependencies from '../../helpers/getDataDependencies';
 
@@ -14,12 +14,12 @@ const locationsAreEqual = (locA, locB) => {
   return true;
 };
 
-export default ({getState, dispatch}) => next => action => {
+export default ({ getState, dispatch }) => next => action => {
   if (action.type === ROUTER_DID_CHANGE) {
-    if ( getState().router && locationsAreEqual(action.payload.location, getState().router.location)) {
+    if (getState().router && locationsAreEqual(action.payload.location, getState().router.location)) {
       next(action);
     } else {
-      const {components, location, params} = action.payload;
+      const { components, location, params } = action.payload;
       const promises = getDataDependencies(components, getState, dispatch, location, params);
 
       if (promises.length > 0) {

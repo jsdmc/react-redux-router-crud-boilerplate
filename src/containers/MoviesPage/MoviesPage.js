@@ -58,8 +58,8 @@ export class MoviesPage extends Component {
 
           <h2 className="sub-header">Movies</h2>
 
-          <button className={styles.refreshBtn + ' btn btn-success'} onClick={this.props.load}><i
-            className={refreshClassName}/> {' '} Reload movies
+          <button className={`${styles.refreshBtn} btn btn-success`} onClick={this.props.load}>
+            <i className={refreshClassName}/> {' '} Reload movies
           </button>
 
           <p>

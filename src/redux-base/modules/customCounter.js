@@ -41,10 +41,8 @@ export function increment100() {
 }
 
 // let's say it's some action imported from some duck or other module
-const anotherThunkAction = () => {
-  return (dispatch) => {
-    dispatch({ type: 'HELLO_ACTION_ASYNC'});
-  };
+const anotherThunkAction = () => dispatch => {
+  dispatch({ type: 'HELLO_ACTION_ASYNC' });
 };
 
 export function decrement100Async() {
@@ -57,7 +55,7 @@ export function decrement100Async() {
     dispatch({ type: DECREMENT100_ASYNC });
 
     // Lets decrement global counter
-    dispatchGlobal({ type: 'DECREMENT_COUNTER'});
+    dispatchGlobal({ type: 'DECREMENT_COUNTER' });
 
     // we can dispatch thunks to global namespace
     // and from within the thunk action also will be dispatched as global -

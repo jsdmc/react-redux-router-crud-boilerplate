@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
 import { pushState } from 'redux-router';
 import { reduxForm } from 'redux-form';
 import { login } from 'redux-base/modules/auth';
@@ -53,15 +52,15 @@ class Login extends Component {
     const styles = require('./LoginPage.scss');
 
     // grab props related to redux-form
-    const { user, loginError, fields: {userName, password, rememberMe}, handleSubmit } = this.props;
+    const { user, loginError, fields: { userName, password, rememberMe }, handleSubmit } = this.props;
 
     const fieldClasses = (field, classes) => classnames(classes, {
       'has-error': field.error && field.touched
     });
-    const errorBlock = (field) => ( field.error && field.touched && <small className="help-block">{field.error}</small> );
+    const errorBlock = (field) => (field.error && field.touched && <small className="help-block">{field.error}</small>);
 
     return (
-      <div className={'container ' + styles.loginPage}>
+      <div className={`container ${styles.loginPage}`}>
         <div className="row">
           <div className="col-md-4 col-md-offset-4 col-sm-5 col-sm-offset-5">
             <div className="panel panel-default panel-signin">
@@ -125,4 +124,3 @@ Login.propTypes = {
 // export the wrapped with decorators component
 // of course '@' syntax can be used. But Sun approach helps to test component later
 export default reduxForm(reduxFormConfig, mapStateToProps)(Login);
-
