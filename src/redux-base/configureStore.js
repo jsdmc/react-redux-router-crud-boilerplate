@@ -8,25 +8,26 @@ import reducer from './modules/reducer';
 import config from 'config';
 
 const middlewares = [
-  transitionMiddleware,
-  thunk,
-  promiseMiddleware
+  applyMiddleware(
+    transitionMiddleware,
+    thunk,
+    promiseMiddleware
+  ),
+  reduxReactRouter({ createHistory })
 ];
-
-let createFinalStore;
 
 // use only for dev mode
 if (!config.isProduction) {
   const DevTools = require('utils/DevTools').default;
-  createFinalStore = compose(applyMiddleware(...middlewares), DevTools.instrument())(createStore);
-} else {
-  createFinalStore = applyMiddleware(...middlewares)(createStore);
+  middlewares.push(DevTools.instrument());
 }
 
-const createStoreWithMiddleware = reduxReactRouter({ createHistory })(createFinalStore);
-
 export default function configureStore(initialState) {
-  const store = createStoreWithMiddleware(reducer, initialState);
+  const store = createStore(
+    reducer,
+    initialState,
+    compose(...middlewares)
+  );
 
   if (!config.isProduction && module.hot) {
     // Enable Webpack hot module replacement for reducers

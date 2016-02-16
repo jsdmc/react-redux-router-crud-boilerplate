@@ -20,17 +20,17 @@ const reduxFormConfig = {
   validate: loginFormValidation             // a synchronous validation function
 };
 
-// things above can be replaced with 2 decorators connected to our component.
+// things above can be replaced with decorator connected to our component.
 /*
-@connect((state) => ({
-  user: state.auth.user,
-  loginError: state.auth.loginError
-}))
-@connectReduxForm({
+@reduxForm({
   form: 'loginForm',
   fields: ['userName', 'password', 'rememberMe'],
   validate: loginFormValidation
-})
+},
+state => ({
+  user: state.auth.user,
+  loginError: state.auth.loginError
+}))
 */
 
 class Login extends Component {
