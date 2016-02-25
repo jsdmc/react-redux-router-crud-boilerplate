@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
-import { push } from 'react-router-redux';
 import { reduxForm } from 'redux-form';
 import { login } from 'redux-base/modules/auth';
 import loginFormValidation from './loginForm/loginFormValidation';
 import classnames from 'classnames';
+import { browserHistory } from 'react-router';
 
 // react binding for redux
 // https://github.com/rackt/react-redux
@@ -39,7 +39,7 @@ class Login extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.user) {
       // logged in, let's show home
-      this.props.dispatch(push({ pathname: '/counter' }));
+      browserHistory.push('/counter');
     }
   }
 

@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 // Smart component that listens to url changes and rerenders inself
 // Decorator @connect no used for testability reasons.
 // Instead, function defined on top of component. It's more readable
-const mapStateToProps = (state) => ({ location: state.routing.location });
+const mapStateToProps = (state) => ({ location: state.routing.locationBeforeTransitions });
 
 class SmartLink extends Component {
   render() {

@@ -2,6 +2,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, browserHistory } from 'react-router';
+import { syncHistoryWithStore } from 'react-router-redux';
 
 import { Provider } from 'react-redux';
 import configureStore from './redux-base/configureStore';
@@ -10,6 +11,7 @@ import getRoutes from './routes';
 import config from 'config';
 
 const store = configureStore();
+const history = syncHistoryWithStore(browserHistory, store);
 
 let appRootComponent;
 
@@ -22,7 +24,7 @@ if (!config.isProduction) {
   appRootComponent = () => (
     <Provider store={store}>
       <div>
-        <Router history={browserHistory} routes={getRoutes(store)}/>
+        <Router history={history} routes={getRoutes(store)}/>
         <DevTools />
       </div>
     </Provider>
@@ -30,7 +32,7 @@ if (!config.isProduction) {
 } else {
   appRootComponent = () => (
     <Provider store={store}>
-      <Router history={browserHistory} routes={getRoutes(store)}/>
+      <Router history={history} routes={getRoutes(store)}/>
     </Provider>
   );
 }

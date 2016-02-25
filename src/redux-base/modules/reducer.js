@@ -4,14 +4,14 @@ import counter from './counter';
 import customCounter from './customCounter';
 import auth from './auth';
 import movies from './movies';
-import { routeReducer } from 'react-router-redux';
+import { routerReducer } from 'react-router-redux';
 import { reducer as formReducer } from 'redux-form';
 import loginFormPlugin from 'containers/LoginPage/loginForm/loginFormPlugin';
 
 import multireducer from 'multireducer';
 
 export default combineReducers({
-  routing: routeReducer,
+  routing: routerReducer,
   auth,
   counter,
   multiCounters: multireducer({
